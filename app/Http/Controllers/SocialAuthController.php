@@ -13,8 +13,20 @@ class SocialAuthController extends Controller
 {
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        try {
+            if ($provider === 'facebook') {
+                return Socialite::driver($provider)
+                    ->scopes(['email']) // Request email permission
+                    ->redirect();
+            } else {
+                // Default redirect for other providers
+                return Socialite::driver($provider)->redirect();
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('error', 'Failed to connect to ' . ucfirst($provider) . ': ' . $e->getMessage());
+        }
     }
+
 
     public function handleProviderCallback($provider)
     {

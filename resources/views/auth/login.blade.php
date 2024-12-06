@@ -111,20 +111,21 @@
                                     {{ __('Log in') }}
                                 </x-primary-button>
                             </div>
-
                         </form>
 
                         <div class="text-center">
                             <h5 class="mt-3 text-muted">Sign in with</h5>
                             <ul class="social-list list-inline mt-3 mb-0">
+                                {{-- <li class="list-inline-item">
+                                    <a href="{{ route('social.login', 'facebook') }}" class="social-list-item border-primary text-primary">
+                                        <i class="mdi mdi-facebook"></i>
+                                    </a>
+                                </li> --}}
                                 <li class="list-inline-item">
-                                    <a href="javascript: void(0);"
-                                        class="social-list-item border-primary text-primary"><i
-                                            class="mdi mdi-facebook"></i></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i
-                                            class="mdi mdi-google"></i></a>
+                                    <a href="{{ route('social.login', 'google') }}"
+                                        class="social-list-item border-danger text-danger">
+                                        <i class="mdi mdi-google"></i>
+                                    </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="{{ route('social.login', 'github') }}"
