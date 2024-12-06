@@ -20,5 +20,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/login/{provider}', [SocialAuthController::class, 'redirectToProvider']);
-Route::get('/login/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);
+Route::get('/login/{provider}', [SocialAuthController::class, 'redirectToProvider'])->name('social.login');
+Route::get('/login/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback'])->name('social.callback');
