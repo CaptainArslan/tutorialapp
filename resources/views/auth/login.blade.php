@@ -143,7 +143,7 @@
                     <div class="row mt-3">
                         <div class="col-12 text-center">
                             <p>
-                                <a href="auth-recoverpw.html"
+                                <a href="{{route('password.request')}}"
                                     class="text-white-50 ms-1">{{ __('Forgot your password?') }}</a>
                             </p>
                             <p class="text-white-50">{{ __('Don\'t have an account?') }}

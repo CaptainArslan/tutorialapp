@@ -18,7 +18,7 @@
                                 </a>
                             </div>
                             <p class="text-muted mb-4 mt-3">
-                                {{ __("Don't have an account? Create your account, it takes less than a minute") }}
+                                {{ __('Don\'t have an account? Create your account, it takes less than a minute') }}
                             </p>
                         </div>
 
@@ -64,10 +64,10 @@
                                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>
                             <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signup">
-                                            <label class="form-check-label" for="checkbox-signup">I accept <a href="javascript: void(0);" class="text-dark">Terms and Conditions</a></label>
-                                        </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="checkbox-signup">
+                                    <label class="form-check-label" for="checkbox-signup">I accept <a href="javascript: void(0);" class="text-dark">Terms and Conditions</a></label>
+                                </div>
                             </div>
                             <div class="text-center d-grid">
                                 <x-primary-button type="submit" class="btn btn-success">
