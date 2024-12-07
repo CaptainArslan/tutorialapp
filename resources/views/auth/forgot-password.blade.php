@@ -22,15 +22,16 @@
                             </p>
                         </div>
 
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+
                         <form method="POST" action="{{ route('password.email') }}">
                             @csrf
-
                             <!-- Email Address -->
                             <div class="mb-3">
                                 <x-input-label for="email" :value="__('Email')" class="form-label" />
                                 <x-text-input id="email" type="email" name="email" :value="old('email')" required
                                     autofocus class="form-control" placeholder="{{ __('Enter your email address') }}" />
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('email')" class="" />
                             </div>
 
                             <div class="text-center d-grid">
@@ -48,8 +49,8 @@
                                 </a>
                             </p>
                         </div>
-                    </div> <!-- end card-body -->
-                </div> <!-- end card -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
