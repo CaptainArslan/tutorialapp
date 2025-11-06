@@ -259,10 +259,15 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-log-out"></i>
-                                <span>Logout</span>
-                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="{{ route('logout') }}" 
+                                   class="dropdown-item notify-item"
+                                   onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <i class="fe-log-out"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </form>
 
                         </div>
                     </li>
@@ -271,23 +276,21 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="index.html" class="logo logo-dark text-center">
+                    <a href="{{ route('dashboard') }}" class="logo logo-dark text-center">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
-                            <!-- <span class="logo-lg-text-light">UBold</span> -->
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="20">
-                            <!-- <span class="logo-lg-text-light">U</span> -->
+                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="20">
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light text-center">
+                    <a href="{{ route('dashboard') }}" class="logo logo-light text-center">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-light.png" alt="" height="20">
+                            <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="20">
                         </span>
                     </a>
                 </div>
@@ -324,60 +327,120 @@
             <div class="h-100" data-simplebar>
 
                 <!-- User box -->
-                <div class="user-box text-center">
-                    <img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
-                        class="rounded-circle avatar-md">
-                    <div class="dropdown">
-                        <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                            data-bs-toggle="dropdown">Geneva Kennedy</a>
-                        <div class="dropdown-menu user-pro-dropdown">
+                @auth
+                    <div class="user-box text-center">
+                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-img" 
+                            class="rounded-circle avatar-md">
+                        <div class="dropdown">
+                            <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
+                                data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                            <div class="dropdown-menu user-pro-dropdown">
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-user me-1"></i>
-                                <span>My Account</span>
-                            </a>
+                                <!-- item-->
+                                <a href="{{ route('profile.edit') }}" class="dropdown-item notify-item">
+                                    <i class="fe-user me-1"></i>
+                                    <span>My Account</span>
+                                </a>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-settings me-1"></i>
-                                <span>Settings</span>
-                            </a>
+                                <!-- item-->
+                                <a href="{{ route('profile.edit') }}" class="dropdown-item notify-item">
+                                    <i class="fe-settings me-1"></i>
+                                    <span>Settings</span>
+                                </a>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-lock me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
+                                <div class="dropdown-divider"></div>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-log-out me-1"></i>
-                                <span>Logout</span>
-                            </a>
+                                <!-- item-->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" 
+                                       class="dropdown-item notify-item"
+                                       onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <i class="fe-log-out me-1"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </form>
 
+                            </div>
                         </div>
+                        <p class="text-muted">{{ Auth::user()->email }}</p>
                     </div>
-                    <p class="text-muted">Admin Head</p>
-                </div>
+                @endauth
 
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
 
                     <ul id="side-menu">
                         <li>
-                            <a href="#sidebarDashboards" data-bs-toggle="collapse">
+                            <a href="{{ route('dashboard') }}" 
+                               class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                 <i class="mdi mdi-view-dashboard-outline"></i>
-                                {{-- <span class="badge bg-info rounded-pill float-end">4</span> --}}
-                                <span> Dashboard </span>
+                                <span>Dashboard</span>
                             </a>
-                            <div class="collapse" id="sidebarDashboards">
+                        </li>
+
+                        <li>
+                            <a href="{{ route('home') }}" 
+                               class="{{ request()->routeIs('home') ? 'active' : '' }}">
+                                <i class="mdi mdi-book-open-variant"></i>
+                                <span>Browse Tutorials</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('tutorials.create') }}" 
+                               class="{{ request()->routeIs('tutorials.create') ? 'active' : '' }}">
+                                <i class="mdi mdi-plus-circle"></i>
+                                <span>Create Tutorial</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#sidebarTutorials" data-bs-toggle="collapse" 
+                               class="{{ request()->routeIs('tutorials.*') && !request()->routeIs('tutorials.create') ? 'active' : '' }}">
+                                <i class="mdi mdi-file-document-outline"></i>
+                                <span>Tutorials</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse {{ request()->routeIs('tutorials.*') && !request()->routeIs('tutorials.create') ? 'show' : '' }}" id="sidebarTutorials">
                                 <ul class="nav-second-level">
-                                    <li>
-                                        <a href="index.html">All Tutorials</a>
-                                    </li>
+                                    @php
+                                        $myTutorials = \App\Models\Tutorial::where('user_id', auth()->id())
+                                            ->latest()
+                                            ->limit(10)
+                                            ->get();
+                                    @endphp
+                                    @if($myTutorials->count() > 0)
+                                        @foreach($myTutorials as $tutorial)
+                                            <li>
+                                                <a href="{{ route('tutorials.edit', ['tutorial' => $tutorial->slug]) }}" 
+                                                   class="{{ request()->routeIs('tutorials.edit', ['tutorial' => $tutorial->slug]) ? 'active' : '' }}">
+                                                    {{ Str::limit($tutorial->title, 30) }}
+                                                    @if($tutorial->status === 'published')
+                                                        <span class="badge bg-success float-end">Published</span>
+                                                    @else
+                                                        <span class="badge bg-secondary float-end">Draft</span>
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li>
+                                            <a href="javascript:void(0);" class="text-muted">
+                                                <small>No tutorials yet</small>
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('profile.edit') }}" 
+                               class="{{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                                <i class="mdi mdi-account"></i>
+                                <span>Profile</span>
+                            </a>
                         </li>
                     </ul>
 

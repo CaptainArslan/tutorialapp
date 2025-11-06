@@ -47,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the tutorials for the user.
+     */
+    public function tutorials(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Tutorial::class);
+    }
 }
